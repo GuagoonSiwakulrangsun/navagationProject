@@ -10,13 +10,11 @@ const SecondPage = ({ navigation, route }) => {
       }, [route.params?.post]);
     
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Button
-            title='Create Post'
-            color='salmon'
-            onPress={() => navigation.navigate('CreatePost')}
-          />
-          <Text style={{ margin: 10 }}>Post: {route.params?.post}</Text>
+        <View style={styles.container}>
+            <Text style={styles.heading}>
+                Thai-Nichi Institute of Techonology
+            </Text>
+          <Text style={styles.textStyle}>Values passed from First Page : {route.params?.post}</Text>
         </View>
       );
 }

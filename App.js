@@ -5,6 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
+import FirstPage from './screens/FirstPage';
+import SecondPage from './screens/SecondPage';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -17,8 +20,8 @@ export default function App() {
           headerTintColor:'#ffff',
           headerTitleStyle:{fontWeight: 'bold' ,fontSize:20}
         }}>
-        <Stack.Screen name='1st' component={FirstScreen}/>
-        <Stack.Screen name='2nd' component={SecondScreen}/>
+        <Stack.Screen name='First Page' component={FirstPage}/>
+        <Stack.Screen name='Second Page' component={SecondPage}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

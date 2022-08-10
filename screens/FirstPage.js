@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
 import React from 'react'
 
 const FirstPage = ({navigation, route}) => {
@@ -6,23 +6,29 @@ const FirstPage = ({navigation, route}) => {
 
     return (
       //use Fragment, setPostText => PostText
-      <>
-      <TextInput
-        multiline
-        placeholder='Plese text here'
-        style={{ height: 200, padding: 10, backgroundColor: 'white' }}
-        onChangeText={setPostText}
-        value={postText}
-      />
-      <Button
-        title='Click'
-        color='salmon'
-        onPress={() => {
-          //Pass params back to HomeScreen funchion
-          navigation.navigate('Home', { post: postText })
-        }}
-      />
-    </>
+      <View style={styles.container}>
+        <Text style={styles.heading}>
+            Thai-Nichi Institute of Techonology
+        </Text>
+        <Text style={styles.textStyle}>
+            Please insert your name to pass it to second screen
+        </Text>
+        <TextInput
+            multiline
+            placeholder='Plese text here'
+            style={{padding: 10,backgroundColor: 'lightgray', marginBottom:10 }}
+            onChangeText={setPostText}
+            value={postText}
+        />
+        <Button
+            title='Go next'
+            color='salmon'
+            onPress={() => {
+            //Pass params back to HomeScreen funchion
+            navigation.navigate('Second Page', { post: postText })
+            }}
+        />
+    </View>
   
   );
 }
@@ -36,13 +42,13 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     heading: {
-        fontSize: 25,
+        fontSize: 22,
         textAlign: 'center',
         marginVertical: 10,
     },
     textStyle: {
         textAlign: 'center',
-        fontSize: 16,
+        fontSize: 14,
         marginVertical: 10,
     },
 })
