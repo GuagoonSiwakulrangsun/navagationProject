@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
  
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+
+import HomeScreen from './screens/HomeScreen';
+import AboutScreen from './screens/AboutScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,14 +13,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='First Page'
+        initialRouteName='Home'
         screenOptions={{
           headerStyle:{backgroundColor: 'tomato'},
           headerTintColor:'#ffff',
           headerTitleStyle:{fontWeight: 'bold' ,fontSize:20}
         }}>
-        <Stack.Screen name='1st' component={FirstScreen}/>
-        <Stack.Screen name='2nd' component={SecondScreen}/>
+        <Stack.Screen name='Home' component={HomeScreen}/>
+        <Stack.Screen name='About' component={AboutScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
