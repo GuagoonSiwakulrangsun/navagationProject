@@ -9,7 +9,7 @@ const FirstPage = ({navigation}) => {
         This is the First Page
       </Text>
       <Button
-        title='Go to second pag'
+        title='Go to second page'
         color= '#77BFC7'
         onPress={() => navigation.navigate('Second Page')}/>
       <Button
