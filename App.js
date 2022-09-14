@@ -1,12 +1,20 @@
 import { View, Text, Button } from "react-native";
 import React from "react";
 
-import { NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import HomeScreen from './screens/HomeScreen';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors:{
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)'
+  }
+}
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -66,7 +74,7 @@ function SettingScreen({ navigation }) {
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
         <MyDrawer/>
     </NavigationContainer>
   );
