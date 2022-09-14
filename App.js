@@ -16,6 +16,18 @@ const MyTheme = {
   }
 }
 
+function SettingScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text style={{fontWeight: 'bold', color: '#5CB3FF', marginBottom: 5}}>Setting !</Text>
+      <Button
+        title="Go To Home"
+        color="#5CB3FF"
+        onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -57,18 +69,6 @@ function MyDrawer(){
         <Drawer.Screen name='Home' component={MyTab}/>
         <Drawer.Screen name='Settings' component={SettingScreen}/>
     </Drawer.Navigator>
-  );
-}
-
-function SettingScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{fontWeight: 'bold', color: '#5CB3FF', marginBottom: 5}}>Setting !</Text>
-      <Button
-        title="Go To Home"
-        color="#5CB3FF"
-        onPress={() => navigation.goBack()} />
-    </View>
   );
 }
 
