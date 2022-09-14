@@ -14,7 +14,6 @@ const IoniconsHeaderButton = (props) => (
   <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 );
 
-
 const HomeScreen = ({navigation}) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({

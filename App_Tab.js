@@ -1,15 +1,36 @@
 import { View, Text, Button } from "react-native";
 import React from "react";
 
-import { NavigationContainer} from "@react-navigation/native";
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import HomeScreen from './screens/HomeScreen';
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Home !</Text>
+      <Button
+        title="Go To setting"
+        color="#5CB3FF"
+        onPress={() => navigation.navigate("Settings")}
+      />
+    </View>
+  );
+}
+
+function SettingScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Setting !</Text>
+      <Button
+        title="Go To Home"
+        color="#5CB3FF"
+        onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
 
 const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
 
 function MyTab() {
   return (
@@ -22,7 +43,7 @@ function MyTab() {
                 ? "ios-information-circle"
                 : "ios-information-circle-outline";
             } else if (route.name === "Settings") {
-              iconName = focused ? "ios-list-outline" : "ios-list";
+              iconName = focused ? "ios-list-box" : "ios-list";
             }
             //you can return any component that you like here
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -37,37 +58,10 @@ function MyTab() {
   );
 }
 
-function MyDrawer(){
-  return(
-    <Drawer.Navigator
-      useLegacyImplementation
-      screenOptions={{
-        drawerStyle:{
-          width:240
-        }
-      }}>
-        <Drawer.Screen name='Home' component={MyTab}/>
-        <Drawer.Screen name='Settings' component={SettingScreen}/>
-    </Drawer.Navigator>
-  );
-}
-
-function SettingScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{fontWeight: 'bold', color: '#5CB3FF', marginBottom: 5}}>Setting !</Text>
-      <Button
-        title="Go To Home"
-        color="#5CB3FF"
-        onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-
 const App = () => {
   return (
     <NavigationContainer>
-        <MyDrawer/>
+      <MyTab />
     </NavigationContainer>
   );
 };
