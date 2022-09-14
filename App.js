@@ -1,83 +1,40 @@
-import { View, Text, Button } from "react-native";
-import React from "react";
+import { View, Text, ActivityIndicator, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+const App = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-import HomeScreen from './screens/HomeScreen';
-
-const MyTheme = {
-  ...DefaultTheme,
-  colors:{
-    ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)'
+  const getMovie = async()=>{
+    try {
+      const response = await fetch('https://reactnative.dev/movies.json');
+      const json = await response.json();
+      setData(json.movies)
+    } catch (error) {
+      alert(error.message);
+    } finally{
+      setLoading(false);
+    }
   }
-}
 
-function SettingScreen({ navigation }) {
+  useEffect(()=>{
+    getMovie();
+  },[])
+
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{fontWeight: 'bold', color: '#5CB3FF', marginBottom: 5}}>Setting !</Text>
-      <Button
-        title="Go To Home"
-        color="#5CB3FF"
-        onPress={() => navigation.goBack()} />
+    <View style={{flex: 1, padding: 20}}>
+      {isLoading ?  <ActivityIndicator/> : (
+          <FlatList
+           data={data}
+           keyExtractor = {({ id }, index ) => id}
+           renderItem={({item})=>(
+            <Text>{item.title}, {item.releaseYear}</Text>
+           )}
+          />
+        )
+      }
     </View>
   );
 }
 
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-
-function MyTab() {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon:({ focused, color, size }) => {
-            let iconName;
-            if (route.name === "Home") {
-              iconName = focused
-                ? "ios-information-circle"
-                : "ios-information-circle-outline";
-            } else if (route.name === "Settings") {
-              iconName = focused ? "ios-list-outline" : "ios-list";
-            }
-            //you can return any component that you like here
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        tabBarActiveTintColor: "#5CB3FF",
-        tabBarInactiveTintColor: "gray",
-      })}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingScreen} />
-    </Tab.Navigator>
-  );
-}
-
-function MyDrawer(){
-  return(
-    <Drawer.Navigator
-      useLegacyImplementation
-      screenOptions={{
-        drawerStyle:{
-          width:240
-        }
-      }}>
-        <Drawer.Screen name='Home' component={MyTab}/>
-        <Drawer.Screen name='Settings' component={SettingScreen}/>
-    </Drawer.Navigator>
-  );
-}
-
-const App = () => {
-  return (
-    <NavigationContainer theme={MyTheme}>
-        <MyDrawer/>
-    </NavigationContainer>
-  );
-};
-
-export default App;
+export default App
